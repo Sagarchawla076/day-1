@@ -21,7 +21,9 @@ const Investor = () => {
             alt="cloud"
           />
         </li>
-        <li className="third-item">WHO MAN</li>
+        <li className="third-item">
+          WHO <br /> MAN
+        </li>
         <li className="fourth-item">
           Equa <span>___</span>long
         </li>

@@ -8,9 +8,11 @@ import Client from "./Clients";
 import Investor from "./Investor";
 import BlogPost from "./BlogPost";
 import Subscribe from "./Subscribe";
+import ChatBox from "./ChatBox";
 const App = () => {
   return (
     <div id="App">
+      <ChatBox />
       <Navbar />
       <Hero />
       <ThisMe />
@@ -18,7 +20,7 @@ const App = () => {
       <Client />
       <Investor />
       <BlogPost />
-      <Subscribe/>
+      <Subscribe />
     </div>
   );
 };

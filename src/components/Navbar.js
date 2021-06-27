@@ -18,6 +18,12 @@ const Navbar = () => {
         </p>
       </div>
       <div className="navbar__right">
+        <div className="navbar__right--menu">
+          <span>
+            ME <br />
+            NU
+          </span>
+        </div>
         <ul className="navbar__links">
           <li className="links__items">Home</li>
           <li className="links__items">CV</li>

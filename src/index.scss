@@ -7,8 +7,59 @@
   box-sizing: border-box;
 }
 
+//Media Query Manager
+
+/*
+0-600px:      Phone
+600px-900px:  Tablet portrait
+900px-1200px: Tablet Landscapte
+1800px + :    Big Desktop  */
+@mixin respond($breakpoint) {
+  @if $breakpoint==tab-land {
+    @media (max-width: 75em) {
+      //1200px
+      @content;
+    }
+  }
+  @if $breakpoint==tab-port {
+    @media (max-width: 56.25em) {
+      //900px
+      @content;
+    }
+  }
+  @if $breakpoint==phone-b {
+    @media (max-width: 43.75em) {
+      //700px
+      @content;
+    }
+  }
+  @if $breakpoint==phone-m {
+    @media (max-width: 37.5em) {
+      //600px
+      @content;
+    }
+  }
+  @if $breakpoint==phone-s {
+    @media (max-width: 18.75em) {
+      //300px
+      @content;
+    }
+  }
+  @if $breakpoint==big-desktop {
+    @media (min-width: 112.5em) {
+      //1800px
+      @content;
+    }
+  }
+}
 html {
   font-size: 62.5%;
+  @include respond(tab-land) {
+    font-size: 50%; //8px
+  }
+  @include respond(tab-port) {
+    font-size: 40%; //5px
+  }
 }
 
 //Variables
@@ -17,14 +68,34 @@ $color-navbar: rgb(244, 244, 244);
 
 //Grid
 #App {
+  height: 100%;
   display: grid;
   grid-template-columns: repeat(
     14,
-    [col-start] minmax(min-content, 8rem) [col-end]
+    [col-start] minmax(min-content, 10rem) [col-end]
   );
   //***********************************************
-  grid-template-rows: 5rem 50rem 20rem 10rem 20rem 30rem 46rem 25rem 24rem 100vh 19rem 5rem;
+  grid-template-rows: 10rem 73rem 30rem 20rem 40rem 50rem 80rem 50rem 43rem 100vh 50rem;
   //********************************************
+
+  @include respond(tab-land) {
+    //1200px
+    grid-template-rows: 10rem 50rem 30rem 20rem 40rem 50rem 80rem 48rem 43rem 75vh 50rem;
+  }
+  @include respond(tab-port) {
+    //900px
+    grid-template-rows: 10rem 50rem 30rem 30rem 50rem 50rem 92rem 48rem 60rem 90vh 60rem;
+  }
+  @include respond(phone-b) {
+    //700px
+    grid-template-columns: minmax(50rem, 108rem);
+    grid-template-rows: 55rem 200rem 100rem repeat(8, max-content);
+  }
+  @include respond(phone-m) {
+    //600px
+    grid-template-columns: max-content;
+    grid-template-rows: 30rem 100vh;
+  }
 }
 
 //Navbar
@@ -37,21 +108,115 @@ $color-navbar: rgb(244, 244, 244);
   justify-content: space-around;
   gap: 10rem;
   font-family: "Poppins", sans-serif;
+  font-size: 1.7rem;
+  @include respond(tab-land) {
+    font-size: 1.8rem;
+  }
+  @include respond(tab-port) {
+    gap: 0rem;
+  }
+  @include respond(phone-b) {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    flex-direction: column-reverse;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    padding-left: 3rem;
+    position: relative;
+  }
+  @include respond(phone-m) {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    flex-direction: column-reverse;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    padding-left: 3rem;
+    position: relative;
+  }
 
   &__left {
     margin-right: 4rem;
+    font-weight: 500;
+    // @include respond(phone-s) {
+    //   margin-top: -15rem;
+    // }
     &--name {
       font-weight: 900;
       cursor: pointer;
+      @include respond(phone-b) {
+        font-size: 5rem;
+      }
+    }
+    p {
+      @include respond(phone-b) {
+        font-size: 5rem;
+        font-weight: 500;
+      }
     }
     &--position {
       background-color: yellow;
+      font-size: 4rem;
+      font-weight: 900;
+    }
+    @include respond(tab-port) {
+      font-size: 3rem;
+      word-spacing: 4px;
     }
   }
   &__right {
     display: flex;
     width: 40%;
     gap: 1.2rem;
+    &--menu {
+      display: none;
+      position: absolute;
+      top: 15%;
+      right: 10%;
+      background-color: black;
+      color: white;
+      width: 6rem;
+      height: 6rem;
+      cursor: pointer;
+      line-height: 1;
+      text-align: center;
+      @include respond(tab-land) {
+        display: inline-block;
+        top: 3%;
+        right: 2%;
+      }
+      @include respond(tab-port) {
+        display: inline-block;
+        top: 2%;
+        right: 2%;
+      }
+      @include respond(phone-b) {
+        width: 15rem;
+        height: 15rem;
+        top: 10%;
+      }
+      span {
+        display: inline-block;
+        margin-top: 1.2rem;
+        @include respond(phone-b) {
+          margin-top: 2.3rem;
+          font-size: 5rem;
+        }
+      }
+
+      // @include respond(phone-s) {
+      //   display: inline-block;
+      // }
+    }
+    @include respond(tab-land) {
+      width: 30%;
+    }
+    @include respond(tab-port) {
+      width: 40%;
+    }
+    @include respond(phone-b) {
+      width: 25%;
+      margin-right: 4rem;
+    }
   }
 
   &__links {
@@ -63,23 +228,62 @@ $color-navbar: rgb(244, 244, 244);
     & > * {
       cursor: pointer;
     }
+    @include respond(tab-land) {
+      display: none;
+    }
+    @include respond(tab-port) {
+      display: none;
+    }
+    // @include respond(phone-s) {
+    //   display: none;
+    // }
   }
+
   &__social {
     .icon {
       font-size: 1.5rem;
     }
     & > * {
       cursor: pointer;
+      font-size: 2.4rem;
+      @include respond(phone-b) {
+        font-size: 7rem;
+        font-weight: 900;
+      }
     }
     li:nth-child(1) {
       display: flex;
       align-items: center;
       gap: 0.3rem;
+      @include respond(tab-land) {
+        display: none;
+      }
+      @include respond(tab-port) {
+        display: none;
+      }
+      // @include respond(phone-s) {
+      //   display: none;
+      // }
     }
     flex: 1;
     list-style: none;
     display: flex;
     justify-content: space-between;
+    @include respond(tab-land) {
+      width: 100%;
+      flex: 1;
+      justify-content: space-evenly;
+      margin-right: 2rem;
+    }
+    @include respond(tab-port) {
+      width: 100%;
+      flex: 1;
+      justify-content: space-evenly;
+    }
+    @include respond(phone-b) {
+      gap: 3rem;
+      margin-left: 4.3rem;
+    }
   }
 }
 
@@ -91,19 +295,33 @@ $color-navbar: rgb(244, 244, 244);
   grid-row: 2 / 3;
   display: flex;
   justify-content: space-between;
-
+  gap: 8rem;
+  @include respond(phone-b) {
+    grid-column: 1 / 2;
+    flex-direction: column-reverse;
+    justify-content: start;
+  }
   &__text {
     flex: 1;
     position: relative;
-
     word-spacing: -1px;
+    @include respond(phone-b) {
+      flex-grow: 0;
+    }
     &--container {
       position: absolute;
       top: 30%;
       left: 25%;
+      @include respond(tab-land) {
+        top: 20%;
+        left: 25%;
+      }
       .span-main {
-        font-size: 4rem;
+        font-size: 7rem;
         font-weight: 500;
+        @include respond(phone-b) {
+          font-size: 6rem;
+        }
       }
       .span-1 {
         font-weight: 100;
@@ -123,10 +341,31 @@ $color-navbar: rgb(244, 244, 244);
       }
     }
   }
-  &__image {
-    max-width: 27rem;
-    max-height: 55rem;
+  &__img {
+    @include respond(phone-b) {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
   }
+  &__image {
+    max-width: 100rem;
+    max-height: 100rem;
+    @include respond(tab-land) {
+      max-width: 50rem;
+      max-height: 50rem;
+    }
+    @include respond(phone-b) {
+      width: 100rem;
+      height: 100rem;
+    }
+  }
+  // @include respond(phone) {
+  //   grid-column: 1 / 2;
+  //   grid-row: 2 / 3;
+  //   flex-direction: column-reverse;
+  //   align-items: center;
+  // }
 }
 
 //ThisIsMe
@@ -136,14 +375,20 @@ $color-navbar: rgb(244, 244, 244);
   grid-row: 3 / 4;
   margin-top: 6rem;
   width: 104%;
-  height: 10rem;
+  height: 16rem;
   background-color: yellow;
   position: relative;
+  @include respond(tab-port) {
+    grid-column: col-start 1 / col-start 12;
+  }
+  @include respond(phone-b) {
+    grid-column: 1 / 2;
+  }
   p {
-    font-size: 3.4rem;
+    font-size: 4.3rem;
     position: absolute;
     left: 10%;
-    top: -30%;
+    top: -20%;
     font-weight: 100;
     font-family: "Poppins", sans-serif;
     span {
@@ -153,21 +398,37 @@ $color-navbar: rgb(244, 244, 244);
   }
 
   &__text {
-    grid-column: col-start 5 / col-end 10;
+    grid-column: col-start 4 / col-end 10;
     grid-row: 4 / 5;
     line-height: 2;
+    font-size: 1.8rem;
+    @include respond(tab-port) {
+      font-size: 2.3rem;
+      grid-column: col-start 6 / col-end 13;
+    }
+    @include respond(phone-b) {
+      grid-column: 1 / 2;
+    }
   }
 }
 
 //Slills
 
 .skills__text {
-  grid-column: col-start 5 / col-end 7;
+  grid-column: col-start 4 / col-end 8;
   grid-row: 5 / 6;
   font-family: "Poppins", sans-serif;
-  font-size: 1.8rem;
+  font-size: 3rem;
   font-weight: 100;
-
+  line-height: 2;
+  letter-spacing: 1px;
+  @include respond(tab-port) {
+    grid-column: col-start 6 / col-end 14;
+    font-size: 4rem;
+  }
+  @include respond(phone-b) {
+    grid-column: 1 / 2;
+  }
   &--para {
     .span-1 {
       background-color: black;
@@ -193,7 +454,7 @@ $color-navbar: rgb(244, 244, 244);
     border: 1px solid black;
     display: inline-block;
     margin-top: 3.3rem;
-    font-size: 0.9rem;
+    font-size: 1.5rem;
     padding: 0.7rem 2.3rem;
     color: black;
     font-weight: 600;
@@ -202,44 +463,73 @@ $color-navbar: rgb(244, 244, 244);
 
 .second__img {
   grid-row: 6 / 7;
-  grid-column: col-start 9 / -1;
+  grid-column: col-start 11 / -1;
+  @include respond(phone-b) {
+    grid-column: 1 / 2;
+  }
   .second__image {
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 55rem;
+    max-height: 55rem;
+    @include respond(tab-land) {
+      max-width: 54rem;
+      max-height: 54rem;
+    }
   }
 }
 
 //Get In Touch
 
 .getInTouch {
-  padding: 5rem 3rem;
+  padding: 8rem 7rem;
   grid-row: 7 / 8;
   grid-column: col-start 3 / col-end 10;
   background-color: $color-navbar;
-  width: 98%;
-
+  width: 105%;
+  @include respond(tab-port) {
+    grid-column: col-start 5 / col-end 12;
+  }
+  @include respond(phone-b) {
+    grid-column: 1 / 2;
+  }
   &__heading {
     h2 {
-      font-size: 3rem;
+      font-size: 5rem;
       font-family: "Poppins", sans-serif;
       font-weight: 100;
+      @include respond(tab-port) {
+        font-size: 6rem;
+      }
       span {
         font-weight: 900;
       }
     }
   }
   &__para-1 {
-    line-height: 1.6;
+    font-size: 1.7rem;
+    line-height: 1.9;
     margin-top: 3rem;
+    @include respond(tab-land) {
+      font-size: 1.8rem;
+    }
+    @include respond(tab-land) {
+      font-size: 2rem;
+    }
   }
   &__para-2 {
     margin-top: 3rem;
-    line-height: 1.6;
+    font-size: 1.7rem;
+    line-height: 1.9;
+    @include respond(tab-land) {
+      font-size: 1.8rem;
+    }
+    @include respond(tab-port) {
+      font-size: 2rem;
+    }
   }
 
   position: relative;
   &__yellow {
-    width: 6rem;
+    width: 10rem;
     background-color: yellow;
     position: absolute;
     left: 95%;
@@ -250,18 +540,23 @@ $color-navbar: rgb(244, 244, 244);
 //Client
 
 .client {
-  width: 110%;
-  height: 44%;
+  width: 120%;
+  height: 40%;
   grid-row: 8 / 9;
   grid-column: col-start 1 / col-end 7;
-  margin-top: 13rem;
-
+  margin-top: 19rem;
   background-color: yellow;
   position: relative;
+  @include respond(tab-port) {
+    grid-column: col-start 1 / col-end 9;
+  }
+  @include respond(phone-b) {
+    grid-column: 1 / 2;
+  }
   p {
-    font-size: 3rem;
+    font-size: 5rem;
     position: absolute;
-    top: -27%;
+    top: -42%;
     left: 10%;
     font-family: poppins;
     line-height: 1.1;
@@ -279,10 +574,21 @@ $color-navbar: rgb(244, 244, 244);
   margin-top: -1rem;
   padding: 7rem 5rem 5rem;
   color: white;
+  @include respond(tab-port) {
+    margin-top: 1rem;
+  }
+  @include respond(phone-b) {
+    grid-column: 1 / 2;
+  }
   &__para {
     text-align: center;
     width: 70%;
     margin: auto;
+    font-size: 1.6rem;
+    line-height: 2;
+    @include respond(tab-port) {
+      font-size: 2.1rem;
+    }
   }
 
   &__list {
@@ -296,35 +602,37 @@ $color-navbar: rgb(244, 244, 244);
 
     .first-item {
       letter-spacing: 1.8px;
-      font-size: 1.5rem;
+      font-size: 2rem;
     }
     .second-item {
       .cloud {
-        width: 60%;
+        width: 100%;
       }
     }
     .third-item {
       border: 1px solid white;
-      padding: 2.2rem 0.7rem;
+      padding: 2.7rem 2.7rem;
+      font-size: 1.9rem;
+      letter-spacing: 3px;
     }
     .fourth-item {
-      font-size: 1.7rem;
+      font-size: 3rem;
     }
     .fifth-item {
       border: 1px solid white;
-      width: 6rem;
-      height: 6rem;
+      width: 10rem;
+      height: 10rem;
       border-radius: 50%;
       position: relative;
       span {
         position: absolute;
-        top: 25%;
-        left: -12%;
+        top: 30%;
+        left: -8%;
         z-index: 1;
         transform: rotate(-25deg);
-        font-size: 2.2rem;
+        font-size: 3rem;
         font-weight: 700;
-        letter-spacing: 2px;
+        letter-spacing: 5px;
         font-family: "Italianno", cursive;
         white-space: nowrap;
       }
@@ -336,15 +644,24 @@ $color-navbar: rgb(244, 244, 244);
 
 .blogPost {
   grid-row: 10 / 11;
-  grid-column: col-start 4 / col-end 11;
-  width: 90%;
+  grid-column: col-start 1 / -1;
+  width: 70%;
   margin: 4.5rem auto 0;
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
   gap: 4.5rem;
+  @include respond(tab-land) {
+  }
+  @include respond(tab-port) {
+  }
+  @include respond(phone-b) {
+    grid-column: 1 / 2;
+  }
+
   &__heading {
     text-align: center;
-    font-size: 3rem;
+    font-size: 5.2rem;
     font-family: poppins;
     font-weight: 300;
     span {
@@ -353,13 +670,13 @@ $color-navbar: rgb(244, 244, 244);
   }
   &__container {
     display: flex;
-    justify-content: space-between;
+    gap: 2rem;
   }
 }
 
 .post {
-  width: 17.5rem;
-  height: 17.5rem;
+  width: 30rem;
+  height: 30rem;
   background-size: cover;
   background-position: 0%;
   background-repeat: no-repeat;
@@ -371,11 +688,11 @@ $color-navbar: rgb(244, 244, 244);
     color: yellow;
   }
   &__date {
-    margin-bottom: 7rem;
-    margin-top: 2rem;
+    margin: 2rem 0 16rem 2rem;
+    font-size: 1.3rem;
   }
   &__name {
-    font-size: 1.4rem;
+    font-size: 2.3rem;
     border-bottom: 1px solid white;
     width: 90%;
     margin: 0 auto;
@@ -389,6 +706,9 @@ $color-navbar: rgb(244, 244, 244);
   &__likes--list {
     display: flex;
     justify-content: space-between;
+    font-size: 1.3rem;
+    margin: 0 2rem;
+    list-style: none;
   }
 }
 
@@ -403,39 +723,50 @@ $color-navbar: rgb(244, 244, 244);
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  gap: 1rem;
+  gap: 5rem;
+  margin-top: 10rem;
+  padding: 10rem 0rem;
+  margin-bottom: 7rem;
+  @include respond(phone-b) {
+    grid-column: 1 / 2;
+  }
   &__heading {
-    font-size: 1.7rem;
+    font-size: 3rem;
     font-family: sans-serif;
     font-weight: 800;
   }
   &__form {
     display: flex;
     flex-direction: column;
-    gap: 0.7rem;
-    transform: translateX(-7rem);
+    gap: 2rem;
+    transform: translateX(-20rem);
     .label {
       display: block;
+      font-size: 1.8rem;
       span {
         color: yellow;
       }
     }
     input {
       display: block;
-      width: 200%;
+      width: 330%;
+      padding: 1rem 0;
       background-color: black;
       border: 1px solid white;
       color: white;
     }
     .button {
       background-color: yellow;
-      width: 200.5%;
+      width: 330.5%;
       border: none;
-      font-size: 1rem;
+      font-size: 1.9rem;
       font-family: cursive;
       font-weight: 500;
       padding: 0.5rem 0;
     }
+  }
+  &__copyright {
+    font-size: 1.5rem;
   }
 }
 .button {
@@ -444,10 +775,11 @@ $color-navbar: rgb(244, 244, 244);
     text-decoration: none;
     border: 1px solid black;
     margin-top: 3rem;
-    padding: 1rem 3.3rem;
+    padding: 1.4rem 5rem;
     display: inline-block;
     color: black;
     transition: all 0.3s;
+    font-size: 1.8rem;
   }
 
   &:hover {
@@ -455,3 +787,48 @@ $color-navbar: rgb(244, 244, 244);
     color: white;
   }
 }
+
+.chatBox {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  height: 7rem;
+  background-color: white;
+  &__icon {
+    position: fixed;
+    bottom: 8rem;
+    right: 1.6rem;
+    color: white;
+    background-color: black;
+    width: 7rem;
+    height: 7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    cursor: pointer;
+  }
+}
+
+/*   @include respond(phone) {
+    flex-direction: column-reverse;
+  }
+    @include respond(phone) {
+      width: 100%;
+    }
+    @include respond(phone) {
+      display: none;
+    }
+     @include respond(phone) {
+        font-size: 8rem;
+      }
+     @include respond(phone) {
+        display: none;
+      }
+    @include respond(phone) {
+      width: 100%;
+      flex: 0;
+      gap: 3rem;
+    } */
