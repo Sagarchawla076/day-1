@@ -21,15 +21,40 @@
       @content;
     }
   }
+  @if $breakpoint==tab-land-s {
+    @media (max-width: 57.5em) {
+      //920px
+      @content;
+    }
+  }
   @if $breakpoint==tab-port {
     @media (max-width: 56.25em) {
       //900px
       @content;
     }
   }
-  @if $breakpoint==phone-b {
+  @if $breakpoint==tab-port-s {
+    @media (max-width: 49.375em) {
+      //790px
+      @content;
+    }
+  }
+  @if $breakpoint==tab-port-vs {
+    @media (max-width: 45.625em) {
+      //730px
+      @content;
+    }
+  }
+
+  @if $breakpoint==phone-vb {
     @media (max-width: 43.75em) {
       //700px
+      @content;
+    }
+  }
+  @if $breakpoint==phone-b {
+    @media (max-width: 41.25em) {
+      //660px
       @content;
     }
   }
@@ -40,8 +65,33 @@
     }
   }
   @if $breakpoint==phone-s {
-    @media (max-width: 18.75em) {
-      //300px
+    @media (max-width: 34.375em) {
+      //550px
+      @content;
+    }
+  }
+  @if $breakpoint==phone-vs {
+    @media (max-width: 31.25em) {
+      //500px
+      @content;
+    }
+  }
+
+  @if $breakpoint==mobile {
+    @media (max-width: 28.125em) {
+      //450px
+      @content;
+    }
+  }
+  @if $breakpoint==mobile-s {
+    //405px
+    @media (max-width: 25.3125em) {
+      @content;
+    }
+  }
+  @if $breakpoint==mobile-vs {
+    //390px
+    @media (max-width: 24.375em) {
       @content;
     }
   }
@@ -82,19 +132,51 @@ $color-navbar: rgb(244, 244, 244);
     //1200px
     grid-template-rows: 10rem 50rem 30rem 20rem 40rem 50rem 80rem 48rem 43rem 75vh 50rem;
   }
+  @include respond(tab-land-s) {
+    grid-template-rows: 10rem 75rem 35rem 25rem 45rem 50rem 110rem 48rem 50rem 75vh 50rem;
+  }
   @include respond(tab-port) {
     //900px
-    grid-template-rows: 10rem 50rem 30rem 30rem 50rem 50rem 92rem 48rem 60rem 90vh 60rem;
+    grid-template-rows: 10rem 50rem 30rem 30rem 50rem 50rem 92rem 48rem 60rem 70vh 60rem;
   }
-  @include respond(phone-b) {
+  @include respond(tab-port-s) {
+    //790px
+    grid-template-rows: 13rem 60rem 30rem 30rem 50rem 50rem 92rem 48rem 60rem 70vh 60rem;
+  }
+  @include respond(tab-port-vs) {
+    //730px
+    grid-template-rows: 14rem 60rem 30rem 30rem 50rem 50rem 92rem 48rem 60rem 70vh 60rem;
+  }
+  @include respond(phone-vb) {
     //700px
     grid-template-columns: minmax(50rem, 108rem);
-    grid-template-rows: 55rem 200rem 100rem repeat(8, max-content);
+    grid-template-rows: 55rem 170rem 30rem 25rem 56rem max-content 100rem 60rem 65rem max-content max-content;
   }
-  @include respond(phone-m) {
-    //600px
-    grid-template-columns: max-content;
-    grid-template-rows: 30rem 100vh;
+
+  @include respond(phone-b) {
+    //660px
+    grid-template-columns: minmax(50rem, 108rem);
+    grid-template-rows: 55rem 170rem 30rem 25rem 56rem max-content 100rem 60rem 65rem max-content max-content;
+  }
+  @include respond(phone-s) {
+    //550px
+    grid-template-columns: minmax(50rem, 108rem);
+    grid-template-rows: 55rem 110rem 30rem 25rem 56rem max-content 100rem 50rem 65rem max-content max-content;
+  }
+  @include respond(phone-vs) {
+    //500px
+    grid-template-columns: minmax(50rem, 108rem);
+    grid-template-rows: 55rem 110rem 30rem 30rem 58rem max-content 109rem 50rem 65rem max-content max-content;
+  }
+  @include respond(mobile) {
+    //450px
+    grid-template-columns: minmax(50rem, 108rem);
+    grid-template-rows: 55rem 110rem 30rem 30rem 58rem max-content 100rem 42rem 65rem max-content max-content;
+  }
+  @include respond(mobile-s) {
+    //405px
+    grid-template-columns: minmax(50rem, 108rem);
+    grid-template-rows: 55rem 110rem 30rem 30rem 58rem max-content 100rem 35rem 65rem max-content max-content;
   }
 }
 
@@ -112,19 +194,13 @@ $color-navbar: rgb(244, 244, 244);
   @include respond(tab-land) {
     font-size: 1.8rem;
   }
+  @include respond(tab-land-s) {
+    gap: 0rem;
+  }
   @include respond(tab-port) {
     gap: 0rem;
   }
-  @include respond(phone-b) {
-    grid-column: 1 / 2;
-    grid-row: 1 / 2;
-    flex-direction: column-reverse;
-    justify-content: space-evenly;
-    align-items: flex-start;
-    padding-left: 3rem;
-    position: relative;
-  }
-  @include respond(phone-m) {
+  @include respond(phone-vb) {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
     flex-direction: column-reverse;
@@ -134,21 +210,41 @@ $color-navbar: rgb(244, 244, 244);
     position: relative;
   }
 
+  // @include respond(phone-b) {
+  //   grid-column: 1 / 2;
+  //   grid-row: 1 / 2;
+  //   flex-direction: column-reverse;
+  //   justify-content: space-evenly;
+  //   align-items: flex-start;
+  //   padding-left: 3rem;
+  //   position: relative;
+  // }
+
   &__left {
     margin-right: 4rem;
     font-weight: 500;
-    // @include respond(phone-s) {
+    // @include respond(phone-m) {
     //   margin-top: -15rem;
     // }
+    @include respond(tab-port) {
+      margin-right: 0;
+      margin-left: 2rem;
+      font-size: 3rem;
+      word-spacing: 4px;
+    }
+    @include respond(tab-port-s) {
+      font-size: 2.2rem;
+    }
     &--name {
       font-weight: 900;
       cursor: pointer;
-      @include respond(phone-b) {
+
+      @include respond(phone-vb) {
         font-size: 5rem;
       }
     }
     p {
-      @include respond(phone-b) {
+      @include respond(phone-vb) {
         font-size: 5rem;
         font-weight: 500;
       }
@@ -157,10 +253,6 @@ $color-navbar: rgb(244, 244, 244);
       background-color: yellow;
       font-size: 4rem;
       font-weight: 900;
-    }
-    @include respond(tab-port) {
-      font-size: 3rem;
-      word-spacing: 4px;
     }
   }
   &__right {
@@ -189,21 +281,31 @@ $color-navbar: rgb(244, 244, 244);
         top: 2%;
         right: 2%;
       }
-      @include respond(phone-b) {
-        width: 15rem;
-        height: 15rem;
-        top: 10%;
+      @include respond(tab-port-vs) {
+        display: inline-block;
+        top: 3.9%;
+        right: 1.5%;
+      }
+      @include respond(phone-vb) {
+        width: 11rem;
+        height: 11rem;
+        top: 12.5%;
+      }
+      @include respond(phone-vb) {
+        width: 9rem;
+        height: 9rem;
+        top: 12%;
       }
       span {
         display: inline-block;
         margin-top: 1.2rem;
-        @include respond(phone-b) {
-          margin-top: 2.3rem;
-          font-size: 5rem;
+        @include respond(phone-vb) {
+          margin-top: 0.65rem;
+          font-size: 4rem;
         }
       }
 
-      // @include respond(phone-s) {
+      // @include respond(phone-m) {
       //   display: inline-block;
       // }
     }
@@ -213,7 +315,7 @@ $color-navbar: rgb(244, 244, 244);
     @include respond(tab-port) {
       width: 40%;
     }
-    @include respond(phone-b) {
+    @include respond(phone-vb) {
       width: 25%;
       margin-right: 4rem;
     }
@@ -234,7 +336,7 @@ $color-navbar: rgb(244, 244, 244);
     @include respond(tab-port) {
       display: none;
     }
-    // @include respond(phone-s) {
+    // @include respond(phone-m) {
     //   display: none;
     // }
   }
@@ -246,6 +348,10 @@ $color-navbar: rgb(244, 244, 244);
     & > * {
       cursor: pointer;
       font-size: 2.4rem;
+      @include respond(phone-vb) {
+        font-size: 7rem;
+        font-weight: 900;
+      }
       @include respond(phone-b) {
         font-size: 7rem;
         font-weight: 900;
@@ -261,9 +367,6 @@ $color-navbar: rgb(244, 244, 244);
       @include respond(tab-port) {
         display: none;
       }
-      // @include respond(phone-s) {
-      //   display: none;
-      // }
     }
     flex: 1;
     list-style: none;
@@ -280,9 +383,26 @@ $color-navbar: rgb(244, 244, 244);
       flex: 1;
       justify-content: space-evenly;
     }
+    @include respond(tab-port-vs) {
+      width: 100%;
+      flex: 0;
+      justify-content: stretch;
+      gap: 4.5rem;
+      margin-left: 5.5rem;
+    }
+    @include respond(phone-vb) {
+      gap: 3rem;
+      margin-left: 4.3rem;
+    }
     @include respond(phone-b) {
       gap: 3rem;
       margin-left: 4.3rem;
+    }
+    @include respond(phone-s) {
+      margin-left: 4rem;
+    }
+    @include respond(phone-vs) {
+      margin-left: 1rem;
     }
   }
 }
@@ -296,6 +416,11 @@ $color-navbar: rgb(244, 244, 244);
   display: flex;
   justify-content: space-between;
   gap: 8rem;
+  @include respond(phone-vb) {
+    grid-column: 1 / 2;
+    flex-direction: column-reverse;
+    justify-content: start;
+  }
   @include respond(phone-b) {
     grid-column: 1 / 2;
     flex-direction: column-reverse;
@@ -305,6 +430,9 @@ $color-navbar: rgb(244, 244, 244);
     flex: 1;
     position: relative;
     word-spacing: -1px;
+    @include respond(phone-vb) {
+      flex-grow: 0;
+    }
     @include respond(phone-b) {
       flex-grow: 0;
     }
@@ -316,11 +444,29 @@ $color-navbar: rgb(244, 244, 244);
         top: 20%;
         left: 25%;
       }
+      @include respond(tab-land-s) {
+        top: 25%;
+        left: 25%;
+      }
+      @include respond(phone-vs) {
+        position: static;
+        text-align: center;
+      }
+      // @include respond(mobile) {
+      //   position: static;
+      //   text-align: center;
+      // }
       .span-main {
         font-size: 7rem;
         font-weight: 500;
+        @include respond(phone-vb) {
+          font-size: 6rem;
+        }
         @include respond(phone-b) {
           font-size: 6rem;
+        }
+        @include respond(phone-vs) {
+          font-size: 5rem;
         }
       }
       .span-1 {
@@ -342,30 +488,54 @@ $color-navbar: rgb(244, 244, 244);
     }
   }
   &__img {
+    @include respond(phone-vb) {
+      grid-column: 1 / 2;
+      width: 90%;
+      height: 70%;
+      margin: 0 auto;
+    }
     @include respond(phone-b) {
-      width: 100%;
-      display: flex;
-      justify-content: center;
+      grid-column: 1 / 2;
+      width: 80%;
+      height: 70%;
+      margin: 0 auto;
+    }
+    @include respond(phone-s) {
+      height: 60%;
+      width: 70%;
+      margin: 0 auto;
+    }
+    @include respond(phone-vs) {
+      height: 67%;
+      width: 87%;
+      margin: 0 auto;
     }
   }
   &__image {
-    max-width: 100rem;
-    max-height: 100rem;
+    width: 100%;
+    height: 100%;
     @include respond(tab-land) {
       max-width: 50rem;
       max-height: 50rem;
     }
+    @include respond(phone-vb) {
+      display: inline-block;
+      margin-left: auto;
+      max-width: 200%;
+      max-height: 150%;
+    }
     @include respond(phone-b) {
-      width: 100rem;
-      height: 100rem;
+      display: inline-block;
+      margin-left: auto;
+      max-width: 200%;
+      max-height: 150%;
+    }
+    @include respond(phone-s) {
+      object-fit: cover;
+      max-width: 100%;
+      max-height: 100%;
     }
   }
-  // @include respond(phone) {
-  //   grid-column: 1 / 2;
-  //   grid-row: 2 / 3;
-  //   flex-direction: column-reverse;
-  //   align-items: center;
-  // }
 }
 
 //ThisIsMe
@@ -378,11 +548,19 @@ $color-navbar: rgb(244, 244, 244);
   height: 16rem;
   background-color: yellow;
   position: relative;
+  @include respond(tab-land-s) {
+    grid-column: col-start 1 / col-end 11;
+  }
   @include respond(tab-port) {
     grid-column: col-start 1 / col-start 12;
   }
+  @include respond(phone-vb) {
+    grid-column: 1 / 2;
+    width: 70%;
+  }
   @include respond(phone-b) {
     grid-column: 1 / 2;
+    width: 70%;
   }
   p {
     font-size: 4.3rem;
@@ -402,13 +580,30 @@ $color-navbar: rgb(244, 244, 244);
     grid-row: 4 / 5;
     line-height: 2;
     font-size: 1.8rem;
+    @include respond(tab-land-s) {
+      grid-column: col-start 4 / col-end 11;
+    }
     @include respond(tab-port) {
       font-size: 2.3rem;
       grid-column: col-start 6 / col-end 13;
     }
+    @include respond(phone-vb) {
+      grid-column: 1 / 2;
+      text-align: center;
+    }
     @include respond(phone-b) {
       grid-column: 1 / 2;
+      text-align: center;
     }
+    @include respond(phone-s) {
+      grid-column: 1 / 2;
+      text-align: center;
+      padding: 0 3rem;
+    }
+    // @include respond(phone-vs) {
+    //   text-align: center;
+    //   padding: 0 3rem;
+    // }
   }
 }
 
@@ -422,12 +617,20 @@ $color-navbar: rgb(244, 244, 244);
   font-weight: 100;
   line-height: 2;
   letter-spacing: 1px;
+  @include respond(tab-land-s) {
+    grid-column: col-start 4 / col-end 9;
+  }
   @include respond(tab-port) {
     grid-column: col-start 6 / col-end 14;
     font-size: 4rem;
   }
+  @include respond(phone-vb) {
+    grid-column: 1 / 2;
+    text-align: center;
+  }
   @include respond(phone-b) {
     grid-column: 1 / 2;
+    text-align: center;
   }
   &--para {
     .span-1 {
@@ -464,15 +667,35 @@ $color-navbar: rgb(244, 244, 244);
 .second__img {
   grid-row: 6 / 7;
   grid-column: col-start 11 / -1;
+  @include respond(phone-vb) {
+    grid-column: 1 / 2;
+    text-align: center;
+    width: 100%;
+  }
   @include respond(phone-b) {
     grid-column: 1 / 2;
+    text-align: center;
+    width: 100%;
   }
+
   .second__image {
     max-width: 55rem;
     max-height: 55rem;
     @include respond(tab-land) {
       max-width: 54rem;
       max-height: 54rem;
+    }
+    @include respond(phone-vb) {
+      width: 85%;
+      max-width: 100%;
+      max-height: 130%;
+      // object-fit: cover;
+    }
+    @include respond(phone-b) {
+      width: 85%;
+      max-width: 100%;
+      max-height: 130%;
+      // object-fit: cover;
     }
   }
 }
@@ -488,8 +711,22 @@ $color-navbar: rgb(244, 244, 244);
   @include respond(tab-port) {
     grid-column: col-start 5 / col-end 12;
   }
+  @include respond(phone-vb) {
+    grid-column: 1 / 2;
+    margin-top: -1rem;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
   @include respond(phone-b) {
     grid-column: 1 / 2;
+    margin-top: -1rem;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @include respond(mobile) {
+    padding: 8rem 1rem;
   }
   &__heading {
     h2 {
@@ -498,6 +735,21 @@ $color-navbar: rgb(244, 244, 244);
       font-weight: 100;
       @include respond(tab-port) {
         font-size: 6rem;
+      }
+      @include respond(phone-vb) {
+        font-size: 5rem;
+      }
+      @include respond(phone-b) {
+        font-size: 5rem;
+      }
+      @include respond(phone-s) {
+        font-size: 4.2rem;
+      }
+      @include respond(phone-s) {
+        font-size: 3.8rem;
+      }
+      @include respond(mobile) {
+        font-size: 3.2rem;
       }
       span {
         font-weight: 900;
@@ -509,10 +761,10 @@ $color-navbar: rgb(244, 244, 244);
     line-height: 1.9;
     margin-top: 3rem;
     @include respond(tab-land) {
-      font-size: 1.8rem;
-    }
-    @include respond(tab-land) {
       font-size: 2rem;
+    }
+    @include respond(mobile) {
+      font-size: 2.1rem;
     }
   }
   &__para-2 {
@@ -525,6 +777,9 @@ $color-navbar: rgb(244, 244, 244);
     @include respond(tab-port) {
       font-size: 2rem;
     }
+    @include respond(mobile) {
+      font-size: 2.1rem;
+    }
   }
 
   position: relative;
@@ -534,6 +789,32 @@ $color-navbar: rgb(244, 244, 244);
     position: absolute;
     left: 95%;
     height: 95%;
+    @include respond(phone-vb) {
+      height: 15%;
+      width: 60%;
+      left: 43.1%;
+      top: -15%;
+      z-index: 2;
+    }
+    @include respond(phone-b) {
+      height: 15%;
+      width: 60%;
+      left: 43.1%;
+      top: -15%;
+      z-index: 2;
+    }
+    @include respond(phone-vb) {
+      top: -10%;
+    }
+    @include respond(phone-b) {
+      top: -10%;
+    }
+    @include respond(phone-b) {
+      width: 70%;
+      height: 12%;
+      top: -8%;
+      left: 30.1%;
+    }
   }
 }
 
@@ -547,12 +828,30 @@ $color-navbar: rgb(244, 244, 244);
   margin-top: 19rem;
   background-color: yellow;
   position: relative;
+  @include respond(tab-land-s) {
+    grid-column: col-start 1 / col-end 9;
+  }
   @include respond(tab-port) {
     grid-column: col-start 1 / col-end 9;
   }
+  @include respond(phone-vb) {
+    grid-column: 1 / 2;
+    width: 70%;
+  }
+  @include respond(phone-vb) {
+    grid-column: 1 / 2;
+    width: 70%;
+    margin-top: 20rem;
+  }
   @include respond(phone-b) {
     grid-column: 1 / 2;
+    width: 70%;
+    margin-top: 20rem;
   }
+  @include respond(mobile) {
+    margin-top: 13rem;
+  }
+
   p {
     font-size: 5rem;
     position: absolute;
@@ -577,9 +876,15 @@ $color-navbar: rgb(244, 244, 244);
   @include respond(tab-port) {
     margin-top: 1rem;
   }
+  @include respond(phone-vb) {
+    grid-column: 1 / 2;
+    padding: 0;
+  }
   @include respond(phone-b) {
     grid-column: 1 / 2;
+    padding: 0;
   }
+
   &__para {
     text-align: center;
     width: 70%;
@@ -599,6 +904,23 @@ $color-navbar: rgb(244, 244, 244);
     margin: 2rem auto 0;
     width: 100%;
     height: 100%;
+    @include respond(phone-vb) {
+      flex-wrap: wrap;
+      height: auto;
+      padding: 2rem;
+      justify-content: stretch;
+      gap: 3rem 8rem;
+      justify-content: center;
+    }
+
+    @include respond(phone-b) {
+      flex-wrap: wrap;
+      height: auto;
+      padding: 2rem;
+      justify-content: stretch;
+      gap: 3rem 8rem;
+      justify-content: center;
+    }
 
     .first-item {
       letter-spacing: 1.8px;
@@ -652,11 +974,23 @@ $color-navbar: rgb(244, 244, 244);
   justify-content: space-evenly;
   gap: 4.5rem;
   @include respond(tab-land) {
+    width: 80%;
+  }
+  @include respond(tab-land-s) {
+    width: 80%;
   }
   @include respond(tab-port) {
+    width: 80%;
+  }
+  @include respond(phone-vb) {
+    grid-column: 1 / 2;
   }
   @include respond(phone-b) {
     grid-column: 1 / 2;
+  }
+  @include respond(phone-m) {
+    width: 100%;
+    padding: 0 2rem;
   }
 
   &__heading {
@@ -671,6 +1005,13 @@ $color-navbar: rgb(244, 244, 244);
   &__container {
     display: flex;
     gap: 2rem;
+    @include respond(tab-land) {
+      gap: 4rem;
+    }
+    @include respond(phone-vs) {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 }
 
@@ -684,12 +1025,28 @@ $color-navbar: rgb(244, 244, 244);
   display: flex;
   flex-direction: column;
   cursor: pointer;
+  @include respond(tab-land) {
+    width: 35rem;
+    height: 35rem;
+  }
+  @include respond(phone-m) {
+    width: 40rem;
+    height: 35rem;
+  }
+  @include respond(phone-vs) {
+    width: 43rem;
+    height: 38rem;
+  }
   &:hover &__name--heading {
     color: yellow;
   }
   &__date {
     margin: 2rem 0 16rem 2rem;
     font-size: 1.3rem;
+    @include respond(phone-s) {
+      font-size: 2rem;
+      margin-bottom: 19rem;
+    }
   }
   &__name {
     font-size: 2.3rem;
@@ -697,6 +1054,9 @@ $color-navbar: rgb(244, 244, 244);
     width: 90%;
     margin: 0 auto;
     margin-bottom: 0.8rem;
+    @include respond(phone-s) {
+      font-size: 3rem;
+    }
 
     &--heading {
       padding-left: 0.7rem;
@@ -709,6 +1069,9 @@ $color-navbar: rgb(244, 244, 244);
     font-size: 1.3rem;
     margin: 0 2rem;
     list-style: none;
+    @include respond(phone-s) {
+      font-size: 2.2rem;
+    }
   }
 }
 
@@ -727,6 +1090,9 @@ $color-navbar: rgb(244, 244, 244);
   margin-top: 10rem;
   padding: 10rem 0rem;
   margin-bottom: 7rem;
+  @include respond(phone-vb) {
+    grid-column: 1 / 2;
+  }
   @include respond(phone-b) {
     grid-column: 1 / 2;
   }
@@ -739,7 +1105,8 @@ $color-navbar: rgb(244, 244, 244);
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    transform: translateX(-20rem);
+    width: 70%;
+
     .label {
       display: block;
       font-size: 1.8rem;
@@ -749,7 +1116,7 @@ $color-navbar: rgb(244, 244, 244);
     }
     input {
       display: block;
-      width: 330%;
+      width: 100%;
       padding: 1rem 0;
       background-color: black;
       border: 1px solid white;
@@ -757,7 +1124,7 @@ $color-navbar: rgb(244, 244, 244);
     }
     .button {
       background-color: yellow;
-      width: 330.5%;
+      width: 100%;
       border: none;
       font-size: 1.9rem;
       font-family: cursive;
@@ -811,24 +1178,3 @@ $color-navbar: rgb(244, 244, 244);
     cursor: pointer;
   }
 }
-
-/*   @include respond(phone) {
-    flex-direction: column-reverse;
-  }
-    @include respond(phone) {
-      width: 100%;
-    }
-    @include respond(phone) {
-      display: none;
-    }
-     @include respond(phone) {
-        font-size: 8rem;
-      }
-     @include respond(phone) {
-        display: none;
-      }
-    @include respond(phone) {
-      width: 100%;
-      flex: 0;
-      gap: 3rem;
-    } */
